@@ -1,0 +1,41 @@
+import factory.WebDriverFactory;
+import factory.WebDriverManagerFactory;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
+import pages.TrainingPage;
+
+public class OpenFullScreen {
+    private static WebDriverManager webDriverManager;
+    private WebDriver driver;
+
+    @BeforeAll
+    public static void init() {
+        webDriverManager = new WebDriverManagerFactory().setDriverManager();
+
+    }
+
+    @BeforeEach
+    public void setDriver() {
+        driver = new WebDriverFactory().getDriver("--start-fullscreen");
+    }
+
+    @BeforeEach
+    public void close() {
+        if(driver != null) {
+            driver.close();
+            driver.quit();
+        }
+    }
+
+    @Test
+    public void authorization() {
+        TrainingPage trainingPage = new TrainingPage(driver);
+        trainingPage.open("/training.html");
+        trainingPage.inputNameEmail("фыв", "asdf@sdfg.rt");
+        trainingPage.checkForm("Форма отправлена с именем: фыв и email: asdf@sdfg.rt");
+    }
+
+}
