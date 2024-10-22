@@ -48,12 +48,6 @@ public class TrainingPage extends AbsBasePage {
         sendBtnForm.click();
     }
 
-//    public void inputNameEmail(String name, String email) {
-//        inputName.sendKeys(name);
-//        inputEmail.sendKeys(email);
-//        sendBtnForm.click();
-//    }
-
     public void inputText(String text) {
         textInput.sendKeys(text);
     }
