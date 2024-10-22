@@ -5,13 +5,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.slf4j.LoggerFactory;
-
-import java.util.logging.Logger;
 
 public class TrainingPage extends AbsBasePage {
-
-    private static final org.slf4j.Logger log = LoggerFactory.getLogger(TrainingPage.class);
 
     public TrainingPage(WebDriver driver) {
         super(driver);
