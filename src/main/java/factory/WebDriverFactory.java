@@ -1,7 +1,7 @@
 package factory;
 
 import data.BrowserName;
-import data.TypeWindow;
+import data.Mode;
 import factory.browserOptions.ChromeSettings;
 import factory.browserOptions.EdgeSettings;
 import factory.browserOptions.FirefoxSettings;
@@ -13,24 +13,41 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.remote.AbstractDriverOptions;
 
 public class WebDriverFactory {
 
     private final String browser = System.getProperty("browser");
 
-    public WebDriver getDriver(String argument) {
+    public WebDriver getDriver(Mode mode) {
 
         WebDriver driver;
 
         BrowserName typeBrowser = BrowserName.valueOf(browser.toUpperCase());
 
         if (typeBrowser == BrowserName.CHROME) {
-            driver = new ChromeDriver((ChromeOptions) new ChromeSettings().setting(argument));
+            driver = new ChromeDriver((ChromeOptions) new ChromeSettings().setting(mode.getArgument()));
         } else if (typeBrowser == BrowserName.EDGE) {
-            driver = new EdgeDriver((EdgeOptions) new EdgeSettings().setting(argument));
+            driver = new EdgeDriver((EdgeOptions) new EdgeSettings().setting(mode.getArgument()));
         } else if (typeBrowser == BrowserName.FIREFOX) {
-            driver = new FirefoxDriver((FirefoxOptions) new FirefoxSettings().setting(argument));
+            driver = new FirefoxDriver((FirefoxOptions) new FirefoxSettings().setting(mode.getArgument()));
+        } else {
+            throw new BrowserNotFoundExceptions(browser);
+        }
+        return driver;
+    }
+
+    public WebDriver getDriver() {
+
+        WebDriver driver;
+
+        BrowserName typeBrowser = BrowserName.valueOf(browser.toUpperCase());
+
+        if (typeBrowser == BrowserName.CHROME) {
+            driver = new ChromeDriver();
+        } else if (typeBrowser == BrowserName.EDGE) {
+            driver = new EdgeDriver();
+        } else if (typeBrowser == BrowserName.FIREFOX) {
+            driver = new FirefoxDriver();
         } else {
             throw new BrowserNotFoundExceptions(browser);
         }

@@ -1,3 +1,4 @@
+import data.Mode;
 import factory.WebDriverFactory;
 import factory.WebDriverManagerFactory;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -8,6 +9,7 @@ import pages.TrainingPage;
 public class OpenKiosk {
     private static WebDriverManager webDriverManager;
     private WebDriver driver;
+    private TrainingPage trainingPage = new TrainingPage(driver);
 
     @BeforeAll
     public static void init() {
@@ -16,7 +18,7 @@ public class OpenKiosk {
 
     @BeforeEach
     public void setDriver() {
-        driver = new WebDriverFactory().getDriver("--kiosk");
+        driver = new WebDriverFactory().getDriver(Mode.KIOSK);
     }
 
     @AfterEach
@@ -27,7 +29,6 @@ public class OpenKiosk {
 
     @Test
     void openModalWindow() {
-        TrainingPage trainingPage = new TrainingPage(driver);
         trainingPage.open("/training.html");
         trainingPage.isOpenModalWindow();
         trainingPage.closeModal();

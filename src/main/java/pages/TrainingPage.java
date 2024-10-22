@@ -36,18 +36,26 @@ public class TrainingPage extends AbsBasePage {
     @FindBy(id = "myModal")
     private WebElement modalWindow;
 
-    public TrainingPage inputNameEmail(String name, String email) {
+    public void inputName(String name) {
         inputName.sendKeys(name);
-        inputEmail.sendKeys(email);
-        sendBtnForm.click();
-
-        return this;
     }
 
-    public TrainingPage inputText(String text) {
-        textInput.sendKeys(text);
+    public void inputEmail(String email) {
+        inputEmail.sendKeys(email);
+    }
 
-        return this;
+    public void clickSendBtn() {
+        sendBtnForm.click();
+    }
+
+//    public void inputNameEmail(String name, String email) {
+//        inputName.sendKeys(name);
+//        inputEmail.sendKeys(email);
+//        sendBtnForm.click();
+//    }
+
+    public void inputText(String text) {
+        textInput.sendKeys(text);
     }
 
     public TrainingPage checkTextInput(String expectedText) {
@@ -60,19 +68,16 @@ public class TrainingPage extends AbsBasePage {
         return this;
     }
 
-    public TrainingPage isOpenModalWindow() {;
+    public void isOpenModalWindow() {;
         if(isElementReady(openModalBtn) == true) {
             modalWindow.getText();
         } else {
             openModalBtn.click();
         }
-        return this;
     }
 
-    public TrainingPage closeModal() {
+    public void closeModal() {
         closeModal.click();
-
-        return this;
     }
 
     private boolean isElementReady(WebElement element) {

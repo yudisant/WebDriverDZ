@@ -1,3 +1,4 @@
+import data.Mode;
 import factory.WebDriverFactory;
 import factory.WebDriverManagerFactory;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -10,6 +11,7 @@ import pages.TrainingPage;
 public class OpenFullScreen {
     private static WebDriverManager webDriverManager;
     private WebDriver driver;
+    private TrainingPage trainingPage = new TrainingPage(driver);
 
     @BeforeAll
     public static void init() {
@@ -19,7 +21,7 @@ public class OpenFullScreen {
 
     @BeforeEach
     public void setDriver() {
-        driver = new WebDriverFactory().getDriver("--start-fullscreen");
+        driver = new WebDriverFactory().getDriver(Mode.FULLSCREEN);
     }
 
     @BeforeEach
@@ -32,9 +34,10 @@ public class OpenFullScreen {
 
     @Test
     public void authorization() {
-        TrainingPage trainingPage = new TrainingPage(driver);
         trainingPage.open("/training.html");
-        trainingPage.inputNameEmail("фыв", "asdf@sdfg.rt");
+        trainingPage.inputName("фыв");
+        trainingPage.inputEmail("asdf@sdfg.rt");
+        trainingPage.clickSendBtn();
         trainingPage.checkForm("Форма отправлена с именем: фыв и email: asdf@sdfg.rt");
     }
 
