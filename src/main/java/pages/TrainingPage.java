@@ -5,8 +5,13 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.slf4j.LoggerFactory;
+
+import java.util.logging.Logger;
 
 public class TrainingPage extends AbsBasePage {
+
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(TrainingPage.class);
 
     public TrainingPage(WebDriver driver) {
         super(driver);
@@ -38,28 +43,32 @@ public class TrainingPage extends AbsBasePage {
 
     public void inputName(String name) {
         inputName.sendKeys(name);
+        logger.info("Enter name");
     }
 
     public void inputEmail(String email) {
         inputEmail.sendKeys(email);
+        logger.info("Enter email");
     }
 
     public void clickSendBtn() {
         sendBtnForm.click();
+        logger.info("Pressing the send button");
     }
 
     public void inputText(String text) {
         textInput.sendKeys(text);
+        logger.info("Entering text into a field");
     }
 
-    public TrainingPage checkTextInput(String expectedText) {
+    public void checkTextInput(String expectedText) {
         Assertions.assertEquals(expectedText, textInput.getAttribute("value"),"Error");
-        return this;
+        logger.info("Text compliance check");
     }
 
-    public TrainingPage checkForm(String expectedText) {
+    public void checkForm(String expectedText) {
         Assertions.assertEquals(expectedText, checkForm.getText(),"Error");
-        return this;
+        logger.info("checking the entered name and email");
     }
 
     public void isOpenModalWindow() {;
@@ -68,6 +77,7 @@ public class TrainingPage extends AbsBasePage {
         } else {
             openModalBtn.click();
         }
+        logger.info("Check for opening a modal window");
     }
 
     public void closeModal() {
