@@ -11,7 +11,6 @@ import pages.TrainingPage;
 public class OpenFullScreen {
     private static WebDriverManager webDriverManager;
     private WebDriver driver;
-    private TrainingPage trainingPage = new TrainingPage(driver);
 
     @BeforeAll
     public static void init() {
@@ -34,6 +33,9 @@ public class OpenFullScreen {
 
     @Test
     public void authorization() {
+
+        TrainingPage trainingPage = new TrainingPage(driver);
+
         trainingPage.open("/training.html");
         trainingPage.inputName("фыв");
         trainingPage.inputEmail("asdf@sdfg.rt");

@@ -9,7 +9,6 @@ import pages.TrainingPage;
 public class OpenHeadless {
     private static WebDriverManager webDriverManager;
     private WebDriver driver;
-    private TrainingPage trainingPage = new TrainingPage(driver);
 
     @BeforeAll
     public static void init() {
@@ -30,6 +29,9 @@ public class OpenHeadless {
 
     @Test
     public void checkInputLine() {
+
+        TrainingPage trainingPage = new TrainingPage(driver);
+
         trainingPage.open("/training.html");
         trainingPage.inputText("ОТУС");
         trainingPage.checkTextInput("ОТУС");
